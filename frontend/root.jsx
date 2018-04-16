@@ -15,15 +15,10 @@ class Root extends React.Component {
       secs: date.getSeconds()
     };
     this.increment = this.increment.bind(this);
-    this.startClock = this.startClock.bind(this);
     this.formatHours = this.formatHours.bind(this);
   }
 
   componentDidMount() {
-    this.startClock();
-  }
-
-  startClock() {
     setInterval(this.increment, 1000);
   }
 
