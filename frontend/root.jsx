@@ -57,11 +57,12 @@ class Root extends React.Component {
     } else if (hours >= 22) {
       return hours.toString();
     } else if (hours < 10) {
-      return "0" + hours.toString;
+      return "0" + hours.toString();
     }
   }
 
   render() {
+
     let hours = this.state.hours || 0;
     let mins = this.state.mins || 0;
     let secs = this.state.secs || 0;
@@ -74,11 +75,11 @@ class Root extends React.Component {
 
     return(
       <div>
-        <div>
-          React is up and running!
+        <div id='welcome'>
+          Here is a clock for you!
         </div>
-        <div>
-          {hours}:{mins}:{secs}{meridian}
+        <div id='clock'>
+          {hours}:{mins}:{secs} {meridian}
         </div>
       </div>
     );
