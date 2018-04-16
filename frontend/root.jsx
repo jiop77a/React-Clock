@@ -15,7 +15,7 @@ class Root extends React.Component {
       secs: date.getSeconds()
     };
     this.increment = this.increment.bind(this);
-    this.formatHours = this.formatHours.bind(this);
+    this.convertHourFormat = this.convertHourFormat.bind(this);
   }
 
   componentDidMount() {
@@ -44,15 +44,13 @@ class Root extends React.Component {
     });
   }
 
-  formatHours(hours) {
+  convertHourFormat(hours) {
     if (hours === 0) {
-      return "12";
-    } else if (hours > 12 && hours < 22) {
-      return "0" + (hours-12).toString();
-    } else if (hours >= 22) {
-      return hours.toString();
-    } else if (hours < 10) {
-      return "0" + hours.toString();
+      return 12;
+    } else if (hours > 12) {
+      return hours - 12;
+    } else {
+      return hours;
     }
   }
 
@@ -64,7 +62,9 @@ class Root extends React.Component {
 
     let meridian = hours > 12 ? "PM" : "AM";
 
-    hours = this.formatHours(hours).toString();
+    hours = this.convertHourFormat(hours);
+
+    hours = (hours < 10) ? `0${hours}` : hours.toString();
     mins = (mins < 10) ? `0${mins}` : mins.toString();
     secs = (secs < 10) ? `0${secs}` : secs.toString();
 
