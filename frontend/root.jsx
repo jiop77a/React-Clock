@@ -51,18 +51,26 @@ class Root extends React.Component {
 
   formatHours(hours) {
     if (hours === 0) {
-      return 12;
-    } else if (hours > 12) {
-      return hours - 12;
-    } else {
-      return hours;
+      return "12";
+    } else if (hours > 12 && hours < 22) {
+      return "0" + (hours-12).toString();
+    } else if (hours >= 22) {
+      return hours.toString();
+    } else if (hours < 10) {
+      return "0" + hours.toString;
     }
   }
 
   render() {
-    let meridian = this.state.hours > 12 ? "PM" : "AM";
-    let bareHours = this.formatHours(this.state.hours);
+    let hours = this.state.hours || 0;
+    let mins = this.state.mins || 0;
+    let secs = this.state.secs || 0;
 
+    let meridian = hours > 12 ? "PM" : "AM";
+
+    hours = this.formatHours(hours).toString();
+    mins = (mins < 10) ? `0${mins}` : mins.toString();
+    secs = (secs < 10) ? `0${secs}` : secs.toString();
 
     return(
       <div>
@@ -70,7 +78,7 @@ class Root extends React.Component {
           React is up and running!
         </div>
         <div>
-          {bareHours}:{this.state.mins}:{this.state.secs}{meridian}
+          {hours}:{mins}:{secs}{meridian}
         </div>
       </div>
     );
